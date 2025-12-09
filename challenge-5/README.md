@@ -193,6 +193,18 @@ Response body (application/json):
 
 Create environment and container app using the pushed image and set the same environment variables as above.
 
+To find location: (mostly: eastus)
+az group show --name rg-user23-acj --query location -o tsv
+
+ENV_NAME: Choose any of your name eg: msagthack-containerapp-env
+
+You need to register the required Azure resource providers before creating the Container App environment. Run these commands:
+az provider register -n Microsoft.OperationalInsights --wait
+az provider register -n Microsoft.App --wait
+
+
+
+
 1. Create the Container App environment (replace the first 3 lines with the appropriate credentials). Don't worry, it should take about 10 minutes to run:
 
    ```bash
