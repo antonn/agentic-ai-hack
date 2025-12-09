@@ -64,7 +64,8 @@ async def get_specialized_agents() -> list[Agent]:
             client=client,
             definition=claim_reviewer_definition,
             description="Agent that reviews insurance claims and retrieves claim details.",
-            plugins=[cosmos_plugin_claims]  
+            plugins=[cosmos_plugin_claims],
+            enable_streaming=False  # Disable streaming to avoid event parsing errors
         )
 
         # Getting Risk Analyzer Agent with Cosmos DB access
@@ -79,7 +80,8 @@ async def get_specialized_agents() -> list[Agent]:
             client=client,
             definition=risk_analyzer_definition,
             description="Agent that analyzes the risk associated with the claim.",
-            plugins=[cosmos_plugin_risk]
+            plugins=[cosmos_plugin_risk],
+            enable_streaming=False  # Disable streaming to avoid event parsing errors
         )
 
         print("✅ Getting Policy Checker Agent...")
@@ -94,6 +96,7 @@ async def get_specialized_agents() -> list[Agent]:
             client=client, 
             definition=policy_checker_definition,
             description="Agent that checks if the policy covers the claim.",
+            enable_streaming=False  # Disable streaming to avoid event parsing errors
         )
 
         approver_agent = ChatCompletionAgent(
