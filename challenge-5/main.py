@@ -56,6 +56,10 @@ async def get_specialized_agents() -> list[Agent]:
         print("🔍 Getting Claim Reviewer Agent...")
         claim_reviewer_definition = await client.agents.get_agent(agent_id=os.environ.get("CLAIM_REV_AGENT_ID"))
         
+        # Ensure tools is not None
+        if claim_reviewer_definition.tools is None:
+            claim_reviewer_definition.tools = []
+        
         claim_reviewer_agent = AzureAIAgent(
             client=client,
             definition=claim_reviewer_definition,
@@ -67,6 +71,10 @@ async def get_specialized_agents() -> list[Agent]:
         print("⚠️ Getting Risk Analyzer Agent...")
         risk_analyzer_definition = await client.agents.get_agent(agent_id=os.environ.get("RISK_ANALYZER_AGENT_ID"))
 
+        # Ensure tools is not None
+        if risk_analyzer_definition.tools is None:
+            risk_analyzer_definition.tools = []
+
         risk_analyzer_agent = AzureAIAgent(
             client=client,
             definition=risk_analyzer_definition,
@@ -77,6 +85,10 @@ async def get_specialized_agents() -> list[Agent]:
         print("✅ Getting Policy Checker Agent...")
 
         policy_checker_definition = await client.agents.get_agent(agent_id=os.environ.get("POLICY_CHECKER_AGENT_ID"))
+
+        # Ensure tools is not None
+        if policy_checker_definition.tools is None:
+            policy_checker_definition.tools = []
 
         policy_checker_agent = AzureAIAgent(
             client=client, 
